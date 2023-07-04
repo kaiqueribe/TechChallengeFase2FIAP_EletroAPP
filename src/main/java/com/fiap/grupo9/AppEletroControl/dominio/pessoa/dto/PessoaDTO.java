@@ -1,4 +1,4 @@
-package com.fiap.grupo9.AppEletroControl.dominio.pessoa;
+package com.fiap.grupo9.AppEletroControl.dominio.pessoa.dto;
 
 import com.fiap.grupo9.AppEletroControl.dominio.endereco.EnderecoDTO;
 

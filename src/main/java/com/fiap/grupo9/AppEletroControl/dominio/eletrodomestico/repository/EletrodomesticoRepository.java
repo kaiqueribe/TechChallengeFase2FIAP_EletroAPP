@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.LongStream;
 
 @Repository
@@ -30,7 +31,7 @@ public class EletrodomesticoRepository implements IEletrodomesticoRepository {
     }
 
     @Override
-    public Optional<Eletrodomestico> buscarPorId(LongStream id) {
+    public Optional<Eletrodomestico> buscarPorId(UUID id) {
         return eletrodomesticos.stream().filter(e -> e.getId().equals(id)).findFirst();
     }
 
@@ -41,7 +42,7 @@ public class EletrodomesticoRepository implements IEletrodomesticoRepository {
     }
 
     @Override
-    public Eletrodomestico atualizar(LongStream id, Eletrodomestico eletrodomestico) {
+    public Eletrodomestico atualizar(UUID id, Eletrodomestico eletrodomestico) {
        var eletrodomesticoBuscado = eletrodomesticos.stream().filter(e ->e.getId().equals(id)).findFirst().get();
         eletrodomesticoBuscado.setNome(eletrodomestico.getNome());
         eletrodomesticoBuscado.setModelo(eletrodomestico.getModelo());
@@ -51,7 +52,7 @@ public class EletrodomesticoRepository implements IEletrodomesticoRepository {
     }
 
     @Override
-    public void remover(LongStream id) {
+    public void remover(UUID id) {
         eletrodomesticos.removeIf(eletrodomestico -> eletrodomestico.getId().equals(id));
 
     }

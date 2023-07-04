@@ -1,6 +1,7 @@
-package com.fiap.grupo9.AppEletroControl.dominio.pessoa;
+package com.fiap.grupo9.AppEletroControl.dominio.pessoa.repository;
 
 
+import com.fiap.grupo9.AppEletroControl.dominio.pessoa.entitie.Pessoa;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;

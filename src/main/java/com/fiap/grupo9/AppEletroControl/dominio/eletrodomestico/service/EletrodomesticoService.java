@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.LongStream;
 
 @Service
@@ -23,9 +24,9 @@ public class EletrodomesticoService {
         return eletrodomesticos;
     }
 
-    public Optional<Eletrodomestico> buscarPorId(LongStream id) {
-        var eletrodomestico = repository.buscarPorId(id);
-        return eletrodomestico;
+    public Optional<Eletrodomestico> buscarPorId(UUID id) {
+        var eletrodomesticos = repository.buscarPorId(id);
+        return eletrodomesticos;
     }
 
     public Eletrodomestico cadastrar(Eletrodomestico eletrodomestico) {
@@ -33,7 +34,7 @@ public class EletrodomesticoService {
         return produtoSalvo;
     }
 
-    public Optional<Eletrodomestico> atualizar(LongStream id, Eletrodomestico eletrodomestico) {
+    public Optional<Eletrodomestico> atualizar(UUID id, Eletrodomestico eletrodomestico) {
         Optional<Eletrodomestico> eletrodomesticoBuscado = this.buscarPorId(id);
 
         if (eletrodomesticoBuscado.isPresent()) {
@@ -43,7 +44,7 @@ public class EletrodomesticoService {
         return Optional.empty();
     }
 
-    public void remover(LongStream id){
+    public void remover(UUID id){
         repository.remover(id);
     }
 

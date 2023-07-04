@@ -1,9 +1,10 @@
-package com.fiap.grupo9.AppEletroControl.dominio.pessoa;
+package com.fiap.grupo9.AppEletroControl.dominio.pessoa.controller;
 
 
+import com.fiap.grupo9.AppEletroControl.dominio.pessoa.entitie.Pessoa;
+import com.fiap.grupo9.AppEletroControl.dominio.pessoa.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

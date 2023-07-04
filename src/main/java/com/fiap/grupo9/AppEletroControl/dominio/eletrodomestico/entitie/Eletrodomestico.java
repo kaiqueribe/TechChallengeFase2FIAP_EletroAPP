@@ -2,11 +2,12 @@ package com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.entitie;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.stream.LongStream;
 
 public class Eletrodomestico {
 
-    private LongStream id;
+    private UUID id;
     private String nome;
     private String modelo;
     private double potencia;
@@ -20,7 +21,7 @@ public class Eletrodomestico {
     }
 
     public Eletrodomestico( String nome, String modelo, double potencia, double voltagem) {
-        this.id = LongStream.of();
+        this.id = UUID.randomUUID();
         this.nome = nome;
         this.modelo = modelo;
         this.potencia = potencia;
@@ -28,11 +29,11 @@ public class Eletrodomestico {
 //        this.consumo = consumo;
     }
 
-    public LongStream getId() {
+    public UUID getId() {
         return id;
     }
 
-    public Eletrodomestico setId(LongStream id) {
+    public Eletrodomestico setId(UUID id) {
         this.id = id;
         return this;
     }

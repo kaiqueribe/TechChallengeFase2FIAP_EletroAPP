@@ -4,17 +4,18 @@ import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.entitie.Eletrodo
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.LongStream;
 
 public interface IEletrodomesticoRepository {
 
     Set<Eletrodomestico> buscarTodos();
 
-    Optional<Eletrodomestico> buscarPorId(LongStream id);
+    Optional<Eletrodomestico> buscarPorId(UUID id);
 
     Eletrodomestico cadastrar (Eletrodomestico eletrodomestico);
 
-    Eletrodomestico atualizar(LongStream id,Eletrodomestico eletrodomestico);
+    Eletrodomestico atualizar(UUID id,Eletrodomestico eletrodomestico);
 
-    void remover (LongStream id);
+    void remover (UUID id);
 }
