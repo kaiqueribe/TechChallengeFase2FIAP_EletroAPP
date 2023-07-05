@@ -1,12 +1,16 @@
 package com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.entitie;
 
-import java.time.LocalDateTime;
+import jakarta.persistence.*;
+
 import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.LongStream;
 
+
+@Entity
+@Table(name = "tb_eletrodomestico")
 public class Eletrodomestico {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String nome;
     private String modelo;
@@ -16,11 +20,10 @@ public class Eletrodomestico {
 
 //    LocalDateTime horarioConsumo;
 
-
     public Eletrodomestico() {
     }
 
-    public Eletrodomestico( String nome, String modelo, double potencia, double voltagem) {
+    public Eletrodomestico(String nome, String modelo, double potencia, double voltagem) {
         this.id = UUID.randomUUID();
         this.nome = nome;
         this.modelo = modelo;

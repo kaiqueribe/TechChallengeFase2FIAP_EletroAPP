@@ -1,21 +1,12 @@
 package com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.repository;
 
 import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.entitie.Eletrodomestico;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.LongStream;
 
-public interface IEletrodomesticoRepository {
+@Repository
+public interface IEletrodomesticoRepository extends JpaRepository<Eletrodomestico, UUID> {
 
-    Set<Eletrodomestico> buscarTodos();
-
-    Optional<Eletrodomestico> buscarPorId(UUID id);
-
-    Eletrodomestico cadastrar (Eletrodomestico eletrodomestico);
-
-    Eletrodomestico atualizar(UUID id,Eletrodomestico eletrodomestico);
-
-    void remover (UUID id);
 }

@@ -11,7 +11,7 @@ import java.net.URI;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.LongStream;
+
 
 @RestController
 @RequestMapping("/eletrodomesticos")
@@ -39,11 +39,11 @@ public class EletrodomesticoController {
         return ResponseEntity.created(uri).body(eletrodomesticoCadastrado);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Optional<Eletrodomestico>> atualizar(@RequestBody Eletrodomestico eletrodomestico, @PathVariable UUID id) {
-        var eletrodomesticoAtualizado = eletrodomesticoService.atualizar(id, eletrodomestico);
-        return ResponseEntity.ok(eletrodomesticoAtualizado);
-    }
+//    @PutMapping("/{id}")
+//    public ResponseEntity<Optional<Eletrodomestico>> atualizar(@RequestBody Eletrodomestico eletrodomestico, @PathVariable UUID id) {
+//        var eletrodomesticoAtualizado = eletrodomesticoService.atualizar(id, eletrodomestico);
+//        return ResponseEntity.ok(eletrodomesticoAtualizado);
+//    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity remover(@PathVariable UUID id) {
