@@ -1,52 +1,64 @@
 package com.fiap.grupo9.AppEletroControl.dominio.pessoa.controller;
 
 
+import com.fiap.grupo9.AppEletroControl.dominio.pessoa.PessoaService;
+import com.fiap.grupo9.AppEletroControl.dominio.pessoa.dto.PessoaDTO;
 import com.fiap.grupo9.AppEletroControl.dominio.pessoa.entitie.Pessoa;
-import com.fiap.grupo9.AppEletroControl.dominio.pessoa.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.Collection;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/pessoas")
 public class PessoaController {
 
-    @Autowired
-    private PessoaRepository repository;
+//    private final Validator validator;
+//    private final ModelMapper modelMapper;
 
-    @GetMapping(value = {"/",""})
-    public ResponseEntity<Collection<Pessoa>> buscarPessoas() {
-        var pessoas = repository.bucarTodos();
+    @Autowired
+    private PessoaService pessoaService;
+
+    @GetMapping
+    public ResponseEntity<Page<PessoaDTO>> buscarTodos(
+            @RequestParam(value = "pagina", defaultValue = "0") Integer pagina,
+            @RequestParam(value = "tamanho", defaultValue = "10") Integer tamanho
+    ) {
+        PageRequest pageRequest = PageRequest.of(pagina, tamanho);
+
+        var pessoas = pessoaService.buscarTodos(pageRequest);
         return ResponseEntity.ok(pessoas);
 
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<Optional<Pessoa>> buscarPorId(@PathVariable Long id) {
-        var pessoa = this.repository.bucarPorId(id);
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PessoaDTO> buscarPorId(@PathVariable UUID id) {
+
+        var pessoa = pessoaService.buscarPorId((id));
         return ResponseEntity.ok(pessoa);
     }
 
+
     @PostMapping
-    public ResponseEntity<Pessoa> cadastrar(@RequestBody Pessoa pessoa) {
-        repository.cadastrar(pessoa);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<PessoaDTO> salvar(@RequestBody PessoaDTO pessoa) {
+        var pessoaCadastrada = pessoaService.cadastrar(pessoa);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand((pessoaCadastrada.getId())).toUri();
+        return ResponseEntity.created(uri).body(pessoaCadastrada);
     }
 
-    @PutMapping
-    public ResponseEntity<Optional<Pessoa>> editarPessoa(@RequestBody Pessoa pessoa) {
-      Optional<Pessoa> pessoaEditada =  repository.atualizar(pessoa);
-      return ResponseEntity.ok(pessoaEditada);
-    }
-
-    @DeleteMapping("{id}")
-    public ResponseEntity deletarPessoa(@PathVariable Long id) {
-        repository.remover(id);
-        return ResponseEntity.ok("Pessoa Deletada com  Sucesso");
+    @DeleteMapping("/{id}")
+    public ResponseEntity remover(@PathVariable UUID id){
+        pessoaService.remover(id);
+        return ResponseEntity.noContent().build();
     }
 
 
