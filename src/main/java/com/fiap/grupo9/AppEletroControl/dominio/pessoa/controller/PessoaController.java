@@ -1,20 +1,16 @@
 package com.fiap.grupo9.AppEletroControl.dominio.pessoa.controller;
 
 
-import com.fiap.grupo9.AppEletroControl.dominio.pessoa.PessoaService;
+import com.fiap.grupo9.AppEletroControl.dominio.pessoa.service.PessoaService;
 import com.fiap.grupo9.AppEletroControl.dominio.pessoa.dto.PessoaDTO;
-import com.fiap.grupo9.AppEletroControl.dominio.pessoa.entitie.Pessoa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Collection;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController

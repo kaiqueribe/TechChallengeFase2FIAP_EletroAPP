@@ -1,4 +1,4 @@
-package com.fiap.grupo9.AppEletroControl.dominio.pessoa;
+package com.fiap.grupo9.AppEletroControl.dominio.pessoa.service;
 
 
 import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.service.exception.ControllerNotFoundException;
@@ -21,7 +21,6 @@ public class PessoaService {
     public Page<PessoaDTO> buscarTodos(PageRequest pagina) {
         var pessoas = repository.findAll(pagina);
         return pessoas.map(pessoa -> new PessoaDTO(pessoa));
-
     }
 
 

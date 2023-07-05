@@ -1,7 +1,5 @@
 package com.fiap.grupo9.AppEletroControl.dominio.pessoa.entitie;
 
-import com.fiap.grupo9.AppEletroControl.dominio.endereco.Endereco;
-import com.fiap.grupo9.AppEletroControl.dominio.pessoa.dto.PessoaDTO;
 import jakarta.persistence.*;
 import lombok.*;
 

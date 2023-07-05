@@ -8,6 +8,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "tb_eletrodomestico")
+
 public class Eletrodomestico {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
