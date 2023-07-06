@@ -13,6 +13,7 @@ import java.util.UUID;
 @Service
 public class EnderecoService {
 
+    @Autowired
     private IEnderecoRepository repository;
 
     public Page<EnderecoDTO> buscarTodos(PageRequest pagina) {
