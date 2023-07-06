@@ -5,6 +5,7 @@ import com.fiap.grupo9.AppEletroControl.dominio.endereco.dto.EnderecoDTO;
 import com.fiap.grupo9.AppEletroControl.dominio.endereco.entitie.Endereco;
 import com.fiap.grupo9.AppEletroControl.dominio.endereco.repository.IEnderecoRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
