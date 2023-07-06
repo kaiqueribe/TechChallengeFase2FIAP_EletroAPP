@@ -5,6 +5,8 @@ import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.service.exceptio
 import com.fiap.grupo9.AppEletroControl.dominio.pessoa.dto.PessoaDTO;
 import com.fiap.grupo9.AppEletroControl.dominio.pessoa.repository.IPessoaRepository;
 import com.fiap.grupo9.AppEletroControl.dominio.pessoa.entitie.Pessoa;
+import com.fiap.grupo9.AppEletroControl.dominio.pessoa.service.exception.CrontrollerNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -43,17 +45,19 @@ public class PessoaService {
 
     public Pessoa atualizar(UUID id, Pessoa pessoa) {
 
-        Pessoa buscaPessoa = (Pessoa) repository.getOne(id);
-        buscaPessoa.setNome(pessoa.getNome());
-        buscaPessoa.setDataNascimento(pessoa.getDataNascimento());
-        buscaPessoa.setCpf(pessoa.getCpf());
+            Pessoa buscaPessoa = (Pessoa) repository.getOne(id);
+            buscaPessoa.setNome(pessoa.getNome());
+            buscaPessoa.setDataNascimento(pessoa.getDataNascimento());
+            buscaPessoa.setCpf(pessoa.getCpf());
 
-        buscaPessoa = repository.save(buscaPessoa);
+            buscaPessoa = repository.save(buscaPessoa);
 
-        return buscaPessoa;
+            return buscaPessoa;
 
 
-    }
+        }
+
+
 
     public void remover(UUID id) {
 

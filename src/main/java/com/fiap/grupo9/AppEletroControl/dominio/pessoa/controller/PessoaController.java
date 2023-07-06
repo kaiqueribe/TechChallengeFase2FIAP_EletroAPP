@@ -1,6 +1,8 @@
 package com.fiap.grupo9.AppEletroControl.dominio.pessoa.controller;
 
 
+import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.entitie.Eletrodomestico;
+import com.fiap.grupo9.AppEletroControl.dominio.pessoa.entitie.Pessoa;
 import com.fiap.grupo9.AppEletroControl.dominio.pessoa.service.PessoaService;
 import com.fiap.grupo9.AppEletroControl.dominio.pessoa.dto.PessoaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +52,13 @@ public class PessoaController {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand((pessoaCadastrada.getId())).toUri();
         return ResponseEntity.created(uri).body(pessoaCadastrada);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Pessoa> atualizar(@RequestBody Pessoa pessoa, @PathVariable UUID id) {
+        var pessoaAtualizada = pessoaService.atualizar(id, pessoa);
+        return ResponseEntity.ok(pessoaAtualizada);
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity remover(@PathVariable UUID id){

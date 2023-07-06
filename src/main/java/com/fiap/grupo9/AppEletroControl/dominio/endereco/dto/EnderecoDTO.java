@@ -21,7 +21,7 @@ public class EnderecoDTO{
     private String cep;
     @JsonProperty
     @NotBlank
-    private String end;
+    private String endereco;
     @JsonProperty
     private String numero;
     @JsonProperty
@@ -36,10 +36,10 @@ public class EnderecoDTO{
     public EnderecoDTO() {
     }
 
-    public EnderecoDTO(UUID id, String cep, String end, String numero, String bairro, String uf, String complemento) {
+    public EnderecoDTO(UUID id, String cep, String endereco, String numero, String bairro, String uf, String complemento) {
         this.id = id;
         this.cep = cep;
-        this.end = end;
+        this.endereco = endereco;
         this.numero = numero;
         this.bairro = bairro;
         this.uf = uf;
@@ -49,7 +49,7 @@ public class EnderecoDTO{
     public EnderecoDTO (Endereco entidade){
         this.id = entidade.getId();
         this.cep = entidade.getCep();
-        this.end= entidade.getEndereco();
+        this.endereco = entidade.getEndereco();
         this.numero=entidade.getNumero();
         this.bairro=entidade.getBairro();
         this.uf=entidade.getUf();

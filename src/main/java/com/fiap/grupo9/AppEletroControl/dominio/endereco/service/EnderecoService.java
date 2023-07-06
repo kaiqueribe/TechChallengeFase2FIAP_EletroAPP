@@ -31,7 +31,7 @@ public class EnderecoService {
         Endereco entidade = new Endereco();
         entidade.setId(UUID.randomUUID());
         entidade.setCep(endereco.getCep());
-        entidade.setEndereco(endereco.getEnd());
+        entidade.setEndereco(endereco.getEndereco());
         entidade.setNumero(endereco.getNumero());
         entidade.setBairro(endereco.getBairro());
         entidade.setUf(endereco.getUf());

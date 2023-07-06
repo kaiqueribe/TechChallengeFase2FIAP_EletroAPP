@@ -1,8 +1,10 @@
 package com.fiap.grupo9.AppEletroControl.dominio.endereco.controller;
 
 import com.fiap.grupo9.AppEletroControl.dominio.endereco.dto.EnderecoDTO;
+import com.fiap.grupo9.AppEletroControl.dominio.endereco.entitie.Endereco;
 import com.fiap.grupo9.AppEletroControl.dominio.endereco.service.EnderecoService;
 
+import com.fiap.grupo9.AppEletroControl.dominio.pessoa.entitie.Pessoa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -46,6 +48,12 @@ public class EnderecoController {
         var enderecoCadastrado = enderecoService.cadastrar(endereco);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand((enderecoCadastrado.getId())).toUri();
         return ResponseEntity.created(uri).body(enderecoCadastrado);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Endereco> atualizar(@RequestBody Endereco endereco, @PathVariable UUID id) {
+        var enderecoAtualizado = enderecoService.atualizar(id, endereco);
+        return ResponseEntity.ok(enderecoAtualizado);
     }
 
     @DeleteMapping("/{id}")
