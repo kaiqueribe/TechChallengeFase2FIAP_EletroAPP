@@ -1,4 +1,5 @@
 # APP ELETRO CONTROL
+[![Build and deploy JAR app to Azure Web App - grupo9-pos-tech](https://github.com/kaiqueribe/AppEletroControl5/actions/workflows/azure-webapps-java-jar.yml/badge.svg)](https://github.com/kaiqueribe/AppEletroControl5/actions/workflows/azure-webapps-java-jar.yml)
 
 Fala pessoal, esse é um app de consumo de energia, onde será possível acompanhar em tempo real o consumo de energia da sua residência quando ele for concluído!
 
