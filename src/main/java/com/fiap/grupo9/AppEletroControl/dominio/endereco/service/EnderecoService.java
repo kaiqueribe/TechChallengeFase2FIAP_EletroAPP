@@ -29,6 +29,7 @@ public class EnderecoService {
 
     public EnderecoDTO cadastrar(EnderecoDTO endereco) {
         Endereco entidade = new Endereco();
+        entidade.setId(UUID.randomUUID());
         entidade.setCep(endereco.getCep());
         entidade.setEndereco(endereco.getEnd());
         entidade.setNumero(endereco.getNumero());
