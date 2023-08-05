@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface IEletrodomesticoRepository extends JpaRepository<Eletrodomestico, UUID> {
+public interface IEletrodomesticoRepository extends JpaRepository<Eletrodomestico, Long> {
 
 }

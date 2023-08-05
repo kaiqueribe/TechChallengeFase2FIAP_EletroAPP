@@ -1,68 +1,60 @@
 package com.fiap.grupo9.AppEletroControl.dominio.pessoa.dto;
 
-import com.fiap.grupo9.AppEletroControl.dominio.pessoa.entitie.Pessoa;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiap.grupo9.AppEletroControl.dominio.pessoa.enums.Sexo;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.*;
+import lombok.*;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDate;
-import java.util.Optional;
-import java.util.UUID;
 
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+@ToString
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PessoaDTO {
+    @JsonIgnore // Ignorar o campo "id" na serialização no método POST
+    private Long id;
 
-    private UUID id;
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$")
+    @Size(min = 2, max = 50)
     private String nome;
+
+    @Past
     private LocalDate dataNascimento;
+
+    @CPF
     private String cpf;
 
-    public PessoaDTO() {
-    }
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Sexo sexo;
 
-    public PessoaDTO(UUID id, String nome, LocalDate dadaNascimento, String cpf) {
-        this.id = id;
-        this.nome = nome;
-        this.dataNascimento = dadaNascimento;
-        this.cpf = cpf;
-    }
+    @Email
+    @NotBlank
+    private String email;
 
-    public PessoaDTO(Pessoa entidade){
-        this.id = entidade.getId();
-        this.nome = entidade.getNome();
-        this.dataNascimento= entidade.getDataNascimento();
-        this.cpf = entidade.getCpf();
-    }
+    @NotBlank
+    @Pattern(regexp = "\\(\\d{2}\\)\\s\\d{4}-\\d{4}", message = "Número de telefone inválido")
+    private String telefone;
 
-    public UUID getId() {
+    private String parentesco;
+
+    @NotNull
+    private Long enderecoId;
+
+    @JsonProperty // Incluir o campo "id" na serialização no método GET
+    public Long getId() {
         return id;
     }
 
-    public PessoaDTO setId(UUID id) {
-        this.id = id;
-        return this;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public PessoaDTO setNome(String nome) {
-        this.nome = nome;
-        return this;
-    }
-
-    public LocalDate getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public PessoaDTO setDataNascimento(LocalDate dadaNascimento) {
-        this.dataNascimento = dadaNascimento;
-        return this;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public PessoaDTO setCpf(String cpf) {
-        this.cpf = cpf;
-        return this;
-    }
 }

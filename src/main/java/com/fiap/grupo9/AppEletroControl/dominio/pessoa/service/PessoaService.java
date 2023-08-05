@@ -1,69 +1,66 @@
 package com.fiap.grupo9.AppEletroControl.dominio.pessoa.service;
 
-
 import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.service.exception.ControllerNotFoundException;
 import com.fiap.grupo9.AppEletroControl.dominio.pessoa.dto.PessoaDTO;
-import com.fiap.grupo9.AppEletroControl.dominio.pessoa.repository.IPessoaRepository;
 import com.fiap.grupo9.AppEletroControl.dominio.pessoa.entitie.Pessoa;
-import com.fiap.grupo9.AppEletroControl.dominio.pessoa.service.exception.CrontrollerNotFoundException;
-import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.fiap.grupo9.AppEletroControl.dominio.pessoa.mapper.PessoaMapper;
+import com.fiap.grupo9.AppEletroControl.dominio.pessoa.repository.IPessoaRepository;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
+import java.util.Optional;
 
 @Service
+@AllArgsConstructor
+@Slf4j
 public class PessoaService {
 
-    @Autowired
-    private IPessoaRepository repository;
+    private IPessoaRepository pessoaRepository;
+    private final PessoaMapper pessoaMapper;
 
     public Page<PessoaDTO> buscarTodos(PageRequest pagina) {
-        var pessoas = repository.findAll(pagina);
-        return pessoas.map(pessoa -> new PessoaDTO(pessoa));
+        log.info("Buscando todas as pessoas...");
+        var pessoas = pessoaRepository.findAll(pagina);
+        return pessoas.map(pessoaMapper::toDTO);
     }
 
-
-    public PessoaDTO buscarPorId(UUID id) {
-
-        var pessoa = repository.findById(id).orElseThrow(() -> new ControllerNotFoundException("Pessoa Não Encontrada"));
-        return new PessoaDTO(pessoa);
-
+    public PessoaDTO buscarPorId(Long id) {
+        log.info("Buscando pessoa com id {}...", id);
+        var pessoa = pessoaRepository.findById(id).orElseThrow(() -> new ControllerNotFoundException("Pessoa Não Encontrada"));
+        return pessoaMapper.toDTO(pessoa);
     }
 
-    public PessoaDTO cadastrar(PessoaDTO pessoa) {
-        Pessoa entidade = new Pessoa();
-        entidade.setNome(pessoa.getNome());
-        entidade.setDataNascimento(pessoa.getDataNascimento());
-        entidade.setCpf(pessoa.getCpf());
+    public PessoaDTO cadastrarPessoa(PessoaDTO pessoaDTO) {
+        log.info("Cadastrando pessoa {}...", pessoaDTO);
+        final Pessoa pessoaCadastrada = pessoaRepository.save(
+                pessoaMapper.toEntity(pessoaDTO)
+        );
 
-        var pessoaCadastrada = repository.save(entidade);
-        return new PessoaDTO(pessoaCadastrada);
+        return pessoaMapper.toDTO(pessoaCadastrada);
     }
 
-    public Pessoa atualizar(UUID id, Pessoa pessoa) {
+    public PessoaDTO atualizar(Long id, PessoaDTO pessoaDTO) {
+        Optional<Pessoa> pessoaOpt = pessoaRepository.findById(id);
+        if (pessoaOpt.isPresent()) {
+            Pessoa pessoa = pessoaOpt.get();
 
-            Pessoa buscaPessoa = (Pessoa) repository.getOne(id);
-            buscaPessoa.setNome(pessoa.getNome());
-            buscaPessoa.setDataNascimento(pessoa.getDataNascimento());
-            buscaPessoa.setCpf(pessoa.getCpf());
+            pessoa.setNome(pessoaDTO.getNome());
+            pessoa.setDataNascimento(pessoaDTO.getDataNascimento());
+            pessoa.setCpf(pessoaDTO.getCpf());
 
-            buscaPessoa = repository.save(buscaPessoa);
+            pessoa = pessoaRepository.save(pessoa);
 
-            return buscaPessoa;
-
-
+            return pessoaMapper.toDTO(pessoa);
         }
 
+        return new PessoaDTO();
+    }
 
-
-    public void remover(UUID id) {
-
-        repository.deleteById(id);
-
-
+    public void remover(Long id) {
+        pessoaRepository.deleteById(id);
     }
 
 }

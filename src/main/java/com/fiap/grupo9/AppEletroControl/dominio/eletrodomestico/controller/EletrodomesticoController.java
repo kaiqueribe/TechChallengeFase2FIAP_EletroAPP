@@ -3,7 +3,8 @@ package com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.controller;
 import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.dto.EletrodomesticoDTO;
 import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.entitie.Eletrodomestico;
 import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.service.EletrodomesticoService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
@@ -11,16 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Collection;
-import java.util.Optional;
-import java.util.UUID;
-//att
 
 @RestController
 @RequestMapping("/eletrodomesticos")
+@Slf4j
+@AllArgsConstructor
 public class EletrodomesticoController {
 
-    @Autowired
     private EletrodomesticoService eletrodomesticoService;
 
     @GetMapping
@@ -35,7 +33,7 @@ public class EletrodomesticoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EletrodomesticoDTO> buscarPorId(@PathVariable UUID id) {
+    public ResponseEntity<EletrodomesticoDTO> buscarPorId(@PathVariable Long id) {
         var eletrodomestico = eletrodomesticoService.buscarPorId(id);
         return ResponseEntity.ok(eletrodomestico);
     }
@@ -48,13 +46,13 @@ public class EletrodomesticoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Eletrodomestico> atualizar(@RequestBody Eletrodomestico eletrodomestico, @PathVariable UUID id) {
-        var eletrodomesticoAtualizado = eletrodomesticoService.atualizar(id, eletrodomestico);
+    public ResponseEntity<Eletrodomestico> atualizar(@RequestBody EletrodomesticoDTO eletrodomesticoDTO, @PathVariable Long id) {
+        var eletrodomesticoAtualizado = eletrodomesticoService.atualizar(id, eletrodomesticoDTO);
         return ResponseEntity.ok(eletrodomesticoAtualizado);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity remover(@PathVariable UUID id) {
+    public ResponseEntity<Void> remover(@PathVariable Long id) {
         eletrodomesticoService.remover(id);
         return ResponseEntity.noContent().build();
     }

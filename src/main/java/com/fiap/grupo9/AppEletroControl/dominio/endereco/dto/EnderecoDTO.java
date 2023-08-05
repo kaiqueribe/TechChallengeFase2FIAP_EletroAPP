@@ -1,58 +1,53 @@
 package com.fiap.grupo9.AppEletroControl.dominio.endereco.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fiap.grupo9.AppEletroControl.dominio.endereco.entitie.Endereco;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.validation.constraints.Size;
+import lombok.*;
+import org.hibernate.validator.constraints.Range;
 
-
-import java.util.UUID;
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+@ToString
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class EnderecoDTO{
 
+    @JsonIgnore // Ignorar o campo "id" na serialização no método POST
+    private Long id;
 
-    private UUID id;
+    @NotBlank
+    @Size(max = 255)
+    private String rua;
+
     @JsonProperty
     @NotBlank
     @Pattern(regexp = "\\d{8}", message = "CEP inválido")
     private String cep;
+
     @JsonProperty
+    @Range(min = 0, max = 10000)
+    private Integer numero;
+
     @NotBlank
-    private String endereco;
-    @JsonProperty
-    private String numero;
+    @Size(max = 100)
+    private String cidade;
+
     @JsonProperty
     @NotBlank
     private String bairro;
+
     @JsonProperty
     @NotBlank
+    @Size(max = 2)
     private String uf;
+
     @JsonProperty
     private String complemento;
-
-    public EnderecoDTO() {
-    }
-
-    public EnderecoDTO(UUID id, String cep, String endereco, String numero, String bairro, String uf, String complemento) {
-        this.id = id;
-        this.cep = cep;
-        this.endereco = endereco;
-        this.numero = numero;
-        this.bairro = bairro;
-        this.uf = uf;
-        this.complemento = complemento;
-    }
-
-    public EnderecoDTO (Endereco entidade){
-        this.id = entidade.getId();
-        this.cep = entidade.getCep();
-        this.endereco = entidade.getEndereco();
-        this.numero=entidade.getNumero();
-        this.bairro=entidade.getBairro();
-        this.uf=entidade.getUf();
-        this.complemento=entidade.getComplemento();
-    }
 }

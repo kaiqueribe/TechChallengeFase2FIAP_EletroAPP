@@ -5,6 +5,7 @@ import com.fiap.grupo9.AppEletroControl.dominio.endereco.entitie.Endereco;
 import com.fiap.grupo9.AppEletroControl.dominio.endereco.service.EnderecoService;
 
 import com.fiap.grupo9.AppEletroControl.dominio.pessoa.entitie.Pessoa;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,9 +18,9 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/enderecos")
+@AllArgsConstructor
 public class EnderecoController {
 
-    @Autowired
     private EnderecoService enderecoService;
 
     @GetMapping
@@ -31,17 +32,13 @@ public class EnderecoController {
 
         var enderecos = enderecoService.buscarTodos(pageRequest);
         return ResponseEntity.ok(enderecos);
-
     }
 
-
     @GetMapping("/{id}")
-    public ResponseEntity<EnderecoDTO> buscarPorId(@PathVariable UUID id) {
-
+    public ResponseEntity<EnderecoDTO> buscarPorId(@PathVariable Long id) {
         var pessoa = enderecoService.buscarPorId((id));
         return ResponseEntity.ok(pessoa);
     }
-
 
     @PostMapping
     public ResponseEntity<EnderecoDTO> salvar(@RequestBody EnderecoDTO endereco) {
@@ -51,13 +48,13 @@ public class EnderecoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Endereco> atualizar(@RequestBody Endereco endereco, @PathVariable UUID id) {
+    public ResponseEntity<Endereco> atualizar(@RequestBody Endereco endereco, @PathVariable Long id) {
         var enderecoAtualizado = enderecoService.atualizar(id, endereco);
         return ResponseEntity.ok(enderecoAtualizado);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity remover(@PathVariable UUID id){
+    public ResponseEntity<Void> remover(@PathVariable Long id){
         enderecoService.remover(id);
         return ResponseEntity.noContent().build();
     }
