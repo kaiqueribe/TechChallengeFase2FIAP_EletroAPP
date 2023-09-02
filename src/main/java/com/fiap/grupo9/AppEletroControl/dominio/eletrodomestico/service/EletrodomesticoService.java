@@ -5,8 +5,8 @@ import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.dto.Eletrodomest
 import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.entitie.Eletrodomestico;
 import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.mapper.EletrodomesticoMapper;
 import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.repository.IEletrodomesticoRepository;
-import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.service.exception.ControllerNotFoundException;
-import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.service.exception.DatabaseException;
+import com.fiap.grupo9.AppEletroControl.config.service.exception.ControllerNotFoundException;
+import com.fiap.grupo9.AppEletroControl.config.service.exception.DatabaseException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,6 +1,6 @@
 package com.fiap.grupo9.AppEletroControl.dominio.pessoa.service;
 
-import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.service.exception.ControllerNotFoundException;
+import com.fiap.grupo9.AppEletroControl.config.service.exception.ControllerNotFoundException;
 import com.fiap.grupo9.AppEletroControl.dominio.pessoa.dto.PessoaDTO;
 import com.fiap.grupo9.AppEletroControl.dominio.pessoa.dto.PessoaDTOFilter;
 import com.fiap.grupo9.AppEletroControl.dominio.pessoa.entitie.Pessoa;

@@ -1,9 +1,9 @@
-package com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.controller.exception;
+package com.fiap.grupo9.AppEletroControl.config.controller.exception;
 
-import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.service.exception.ControllerNotFoundException;
-import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.service.exception.DatabaseException;
-import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.service.exception.DefaultError;
-import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.service.exception.NoContentException;
+import com.fiap.grupo9.AppEletroControl.config.service.exception.ControllerNotFoundException;
+import com.fiap.grupo9.AppEletroControl.config.service.exception.DatabaseException;
+import com.fiap.grupo9.AppEletroControl.config.service.exception.DefaultError;
+import com.fiap.grupo9.AppEletroControl.config.service.exception.UsuarioNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +34,18 @@ public class ControllerExceptionHandler {
         error.setTimestamp(Instant.now());
         error.setStatus(status.value());
         error.setError("Database Error");
+        error.setMessage(exception.getMessage());
+        error.setPath(request.getRequestURI());
+        return ResponseEntity.status(status).body(this.error);
+
+    }
+
+    @ExceptionHandler(UsuarioNotFoundException.class)
+    public ResponseEntity<DefaultError> entityNotFound(UsuarioNotFoundException exception, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.UNAUTHORIZED;
+        error.setTimestamp(Instant.now());
+        error.setStatus(status.value());
+        error.setError("Usuario não existe");
         error.setMessage(exception.getMessage());
         error.setPath(request.getRequestURI());
         return ResponseEntity.status(status).body(this.error);
