@@ -1,6 +1,6 @@
 package com.fiap.grupo9.AppEletroControl.config.interceptor.exception;
 
-import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.service.exception.DefaultError;
+import com.fiap.grupo9.AppEletroControl.config.service.exception.DefaultError;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

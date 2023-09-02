@@ -1,6 +1,6 @@
 package com.fiap.grupo9.AppEletroControl.dominio.endereco.service;
 
-import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.service.exception.ControllerNotFoundException;
+import com.fiap.grupo9.AppEletroControl.config.service.exception.ControllerNotFoundException;
 import com.fiap.grupo9.AppEletroControl.dominio.endereco.dto.EnderecoDTO;
 import com.fiap.grupo9.AppEletroControl.dominio.endereco.dto.EnderecoDTOFilter;
 import com.fiap.grupo9.AppEletroControl.dominio.endereco.entitie.Endereco;

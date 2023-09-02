@@ -1,4 +1,4 @@
-package com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.service.exception;
+package com.fiap.grupo9.AppEletroControl.config.service.exception;
 
 public class DatabaseException extends RuntimeException{
 
