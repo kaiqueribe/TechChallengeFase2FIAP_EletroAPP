@@ -1,6 +1,7 @@
 package com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.service;
 
 import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.dto.EletrodomesticoDTO;
+import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.dto.EletrodomesticoDTOFilter;
 import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.entitie.Eletrodomestico;
 import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.mapper.EletrodomesticoMapper;
 import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.repository.IEletrodomesticoRepository;
@@ -22,15 +23,19 @@ public class EletrodomesticoService {
     private IEletrodomesticoRepository repository;
     private EletrodomesticoMapper eletrodomesticoMapper;
 
-    public Page<EletrodomesticoDTO> buscarTodos(PageRequest pagina) {
-        log.info("Buscando todos os eletrodomésticos...");
-        var eletrodomesticos = repository.findAll(pagina);
+    public Page<EletrodomesticoDTO> buscarComFiltro(PageRequest pagina, EletrodomesticoDTOFilter filtro) {
+        log.info("Buscando eletrodomésticos com filtros...");
+
+
+        var eletrodomesticos = repository.findByDTO(pagina, filtro.getNome(), filtro.getId(), filtro.getModelo(),
+                filtro.getVoltagem(), filtro.getPotencia());
         return eletrodomesticos.map(eletrodomesticoMapper::toDTO);
     }
 
     public EletrodomesticoDTO buscarPorId(Long id) {
         log.info("Buscando eletrodoméstico com id {}...", id);
-        var eletrodomestico = repository.findById(id).orElseThrow(() -> new ControllerNotFoundException("Eletrodoméstico não encontrado"));
+        var eletrodomestico = repository.findById(id).orElseThrow(() ->
+                new ControllerNotFoundException("Eletrodoméstico não encontrado"));
         return eletrodomesticoMapper.toDTO(eletrodomestico);
     }
 

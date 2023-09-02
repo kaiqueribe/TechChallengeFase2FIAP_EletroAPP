@@ -18,6 +18,6 @@ public class Eletrodomestico {
     private Long id;
     private String nome;
     private String modelo;
-    private double potencia;
-    private double voltagem;
+    private Double potencia;
+    private Double voltagem;
 }
