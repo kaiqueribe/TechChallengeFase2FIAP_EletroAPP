@@ -2,6 +2,7 @@ package com.fiap.grupo9.AppEletroControl.dominio.pessoa.service;
 
 import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.service.exception.ControllerNotFoundException;
 import com.fiap.grupo9.AppEletroControl.dominio.pessoa.dto.PessoaDTO;
+import com.fiap.grupo9.AppEletroControl.dominio.pessoa.dto.PessoaDTOFilter;
 import com.fiap.grupo9.AppEletroControl.dominio.pessoa.entitie.Pessoa;
 import com.fiap.grupo9.AppEletroControl.dominio.pessoa.mapper.PessoaMapper;
 import com.fiap.grupo9.AppEletroControl.dominio.pessoa.repository.IPessoaRepository;
@@ -21,9 +22,17 @@ public class PessoaService {
     private IPessoaRepository pessoaRepository;
     private final PessoaMapper pessoaMapper;
 
-    public Page<PessoaDTO> buscarTodos(PageRequest pagina) {
-        log.info("Buscando todas as pessoas...");
-        var pessoas = pessoaRepository.findAll(pagina);
+    public Page<PessoaDTO> buscarComFiltro(PageRequest pagina, PessoaDTOFilter filtro) {
+        log.info("Buscando pessoas com filtro...");
+
+        //apanhei aqui. passando direto filtro.getSexo() no findByDto, não entendia que era null
+        String sexo = null;
+        if (filtro.getSexo() != null){
+            sexo = String.valueOf(filtro.getSexo());
+        }
+        var pessoas = pessoaRepository.findByDTO(pagina, filtro.getId(), filtro.getNome(), filtro.getDataNascimento(),
+                filtro.getCpf(), sexo, filtro.getEmail(), filtro.getTelefone()
+                , filtro.getParentesco(), filtro.getEnderecoId());
         return pessoas.map(pessoaMapper::toDTO);
     }
 

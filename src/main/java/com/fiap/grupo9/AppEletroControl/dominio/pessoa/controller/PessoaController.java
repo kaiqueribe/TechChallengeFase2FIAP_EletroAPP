@@ -1,7 +1,9 @@
 package com.fiap.grupo9.AppEletroControl.dominio.pessoa.controller;
 
+import com.fiap.grupo9.AppEletroControl.dominio.pessoa.dto.PessoaDTOFilter;
 import com.fiap.grupo9.AppEletroControl.dominio.pessoa.service.PessoaService;
 import com.fiap.grupo9.AppEletroControl.dominio.pessoa.dto.PessoaDTO;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,13 +21,14 @@ public class PessoaController {
     private PessoaService pessoaService;
 
     @GetMapping
-    public ResponseEntity<Page<PessoaDTO>> buscarTodos(
+    public ResponseEntity<Page<PessoaDTO>> buscarComFiltro(
+            @Valid @ModelAttribute PessoaDTOFilter filtro,
             @RequestParam(value = "pagina", defaultValue = "0") Integer pagina,
             @RequestParam(value = "tamanho", defaultValue = "10") Integer tamanho
     ) {
         PageRequest pageRequest = PageRequest.of(pagina, tamanho);
 
-        var pessoas = pessoaService.buscarTodos(pageRequest);
+        var pessoas = pessoaService.buscarComFiltro(pageRequest, filtro);
         return ResponseEntity.ok(pessoas);
     }
 

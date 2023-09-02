@@ -1,8 +1,10 @@
 package com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.controller;
 
 import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.dto.EletrodomesticoDTO;
+import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.dto.EletrodomesticoDTOFilter;
 import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.entitie.Eletrodomestico;
 import com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.service.EletrodomesticoService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -22,13 +24,13 @@ public class EletrodomesticoController {
     private EletrodomesticoService eletrodomesticoService;
 
     @GetMapping
-    public ResponseEntity<Page<EletrodomesticoDTO>> buscarTodos(
+    public ResponseEntity<Page<EletrodomesticoDTO>> buscarComFiltro(
+            @Valid @ModelAttribute EletrodomesticoDTOFilter filtro,
             @RequestParam(value = "pagina", defaultValue = "0") Integer pagina,
             @RequestParam(value = "tamanho", defaultValue = "10") Integer tamanho
     ) {
         PageRequest pageRequest = PageRequest.of(pagina, tamanho);
-
-        var eletrodomesticos = eletrodomesticoService.buscarTodos(pageRequest);
+        var eletrodomesticos = eletrodomesticoService.buscarComFiltro(pageRequest, filtro);
         return ResponseEntity.ok(eletrodomesticos);
     }
 

@@ -20,7 +20,6 @@ public class Endereco {
 
     private String rua;
     private String cep;
-    private String endereco;
     private String numero;
     private String bairro;
     private String cidade;
