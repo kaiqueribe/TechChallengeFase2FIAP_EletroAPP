@@ -46,5 +46,5 @@ Durante o desenvolvimento da API Pessoas e Eletrodomésticos, optamos por não u
 ## Método de utilização da(s) API(s):
 
 Para demonstração de utilização da(s) API(s) será utilizado o Swagger pela sua interface mais amigável, porém dentro do projeto foi gerado um arquivo de importação Jason do Postman que pode ser utilizado colocando as mesmas informações apresentadas no Swagger.
-* [Swagger](https://grupo9-pos-tech.azurewebsites.net/swagger-ui/index.html#/) /): Servidor local para teste requisições HTTP (Browser);
+* [Swagger](https://grupo9-pos-tech.azurewebsites.net/eletro/swagger-ui/index.html#/) /): Servidor local para teste requisições HTTP (Browser);
 * [Arquivo para teste Postman](https://warped-meteor-302132.postman.co/workspace/App-Consumo-Eletro~60891746-3429-418a-9499-910f095c31d9/collection/27681645-57d87472-1132-46fc-8916-268f42ac6cce?action=share&creator=27681645 ): Arquivo para simulação direto na máquina (PC).
