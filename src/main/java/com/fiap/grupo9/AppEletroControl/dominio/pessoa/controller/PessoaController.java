@@ -17,11 +17,12 @@ import java.net.URI;
 @RequestMapping("/pessoas")
 @AllArgsConstructor
 public class PessoaController {
-
+    private static final String requestReader = "usuario-auth-key";
     private PessoaService pessoaService;
 
     @GetMapping
     public ResponseEntity<Page<PessoaDTO>> buscarComFiltro(
+            @RequestHeader(requestReader) Long usuarioId,
             @Valid @ModelAttribute PessoaDTOFilter filtro,
             @RequestParam(value = "pagina", defaultValue = "0") Integer pagina,
             @RequestParam(value = "tamanho", defaultValue = "10") Integer tamanho
@@ -33,26 +34,39 @@ public class PessoaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PessoaDTO> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<PessoaDTO> buscarPorId(
+            @RequestHeader(requestReader) Long usuarioId,
+            @PathVariable Long id
+    ) {
         var pessoa = pessoaService.buscarPorId((id));
         return ResponseEntity.ok(pessoa);
     }
 
     @PostMapping
-    public ResponseEntity<PessoaDTO> salvar(@RequestBody PessoaDTO pessoa) {
+    public ResponseEntity<PessoaDTO> salvar(
+            @RequestHeader(requestReader) Long usuarioId,
+            @RequestBody PessoaDTO pessoa
+    ) {
         var pessoaCadastrada = pessoaService.cadastrarPessoa(pessoa);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand((pessoaCadastrada.getId())).toUri();
         return ResponseEntity.created(uri).body(pessoaCadastrada);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PessoaDTO> atualizar(@RequestBody PessoaDTO pessoaDTO, @PathVariable Long id) {
+    public ResponseEntity<PessoaDTO> atualizar(
+            @RequestHeader(requestReader) Long usuarioId,
+            @RequestBody PessoaDTO pessoaDTO,
+            @PathVariable Long id
+    ) {
         var pessoaAtualizada = pessoaService.atualizar(id, pessoaDTO);
         return ResponseEntity.ok(pessoaAtualizada);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> remover(@PathVariable Long id){
+    public ResponseEntity<Void> remover(
+            @RequestHeader(requestReader) Long usuarioId,
+            @PathVariable Long id
+    ){
         pessoaService.remover(id);
         return ResponseEntity.noContent().build();
     }
