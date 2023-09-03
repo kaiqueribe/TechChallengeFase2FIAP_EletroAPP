@@ -1,0 +1,40 @@
+version: "3.7"
+services:
+  # ====================================================================================================================
+  # POSTGRES SERVER - DATABASE
+  # ====================================================================================================================
+  postgresdb-docker:
+    image: postgres:latest
+    container_name: dev-postgresdb
+    environment:
+      POSTGRES_DB: eletroappdatabase
+      POSTGRES_PASSWORD: 12345678
+    ports:
+      - 5433:5432
+    volumes:
+      - ./.data/postgresql/data:/var/lib/postgresql/data
+    networks:
+      - dev-network-eletro
+  # ====================================================================================================================
+  # PGADMIN - INTERFACE DB
+  # ====================================================================================================================
+  pgadmin-docker:
+    image: dpage/pgadmin4
+    container_name: dev-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: 12345678
+    ports:
+      - 5050:80
+    volumes:
+      - ./.data/pgadmin:/var/lib/pgadmin
+    depends_on:
+      - postgresdb-docker
+    networks:
+      - dev-network-eletro
+# ======================================================================================================================
+# REDE -
+# ======================================================================================================================
+networks:
+  dev-network-eletro:
+    driver: bridge
