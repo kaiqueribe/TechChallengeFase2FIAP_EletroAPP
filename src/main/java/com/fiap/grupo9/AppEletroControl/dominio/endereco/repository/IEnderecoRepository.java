@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IEnderecoRepository extends JpaRepository<Endereco, Long> {
     @Query(value = "select e.id, e.rua, e.cep, e.numero, e.cidade, " +
-                    "e.bairro, e.uf, e.complemento " +
+                    "e.bairro, e.uf, e.complemento, e.usuario " +
                     "from tb_endereco e " +
                     "where (:id is null or e.id = :id)" +
                     "and (:rua is null or e.rua = :rua)" +
@@ -20,7 +20,8 @@ public interface IEnderecoRepository extends JpaRepository<Endereco, Long> {
                     "and (:cidade is null or e.cidade = :cidade)" +
                     "and (:bairro is null or e.bairro = :bairro)" +
                     "and (:uf is null or e.uf = :uf)" +
-                    "and (:complemento is null or e.complemento = :complemento)"
+                    "and (:complemento is null or e.complemento = :complemento)" +
+                    "and (:usuarioId is null or e.usuario = :usuarioId)"
     , nativeQuery = true
     ,countQuery = "select count(1) " +
                     "from tb_endereco e " +
@@ -31,7 +32,8 @@ public interface IEnderecoRepository extends JpaRepository<Endereco, Long> {
                     "and (:cidade is null or e.cidade = :cidade)" +
                     "and (:bairro is null or e.bairro = :bairro)" +
                     "and (:uf is null or e.uf = :uf)" +
-                    "and (:complemento is null or e.complemento = :complemento)"
+                    "and (:complemento is null or e.complemento = :complemento)" +
+                    "and (:usuarioId is null or e.usuario = :usuarioId)"
     )
     Page<Endereco> findByDTO(
             Pageable pageable,
@@ -42,6 +44,8 @@ public interface IEnderecoRepository extends JpaRepository<Endereco, Long> {
             @Param("cidade") String cidade,
             @Param("bairro") String bairro,
             @Param("uf") String uf,
-            @Param("complemento") String complemento
-            );
+            @Param("complemento") String complemento,
+            @Param("usuarioId") Long usuarioId
+
+    );
 }

@@ -1,5 +1,6 @@
 package com.fiap.grupo9.AppEletroControl.dominio.pessoa.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fiap.grupo9.AppEletroControl.dominio.pessoa.enums.Sexo;
 
@@ -26,5 +27,7 @@ public class PessoaDTOFilter {
     private String telefone;
     private String parentesco;
     private Long enderecoId;
+    @JsonIgnore
+    private Long usuario;
 
 }

@@ -28,7 +28,7 @@ public class EletrodomesticoService {
 
 
         var eletrodomesticos = repository.findByDTO(pagina, filtro.getNome(), filtro.getId(), filtro.getModelo(),
-                filtro.getVoltagem(), filtro.getPotencia());
+                filtro.getVoltagem(), filtro.getPotencia(), filtro.getUsuario());
         return eletrodomesticos.map(eletrodomesticoMapper::toDTO);
     }
 

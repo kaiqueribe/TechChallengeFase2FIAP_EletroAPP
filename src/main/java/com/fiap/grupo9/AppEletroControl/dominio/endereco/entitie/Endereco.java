@@ -25,4 +25,5 @@ public class Endereco {
     private String cidade;
     private String uf;
     private String complemento;
+    private Long usuario;
 }

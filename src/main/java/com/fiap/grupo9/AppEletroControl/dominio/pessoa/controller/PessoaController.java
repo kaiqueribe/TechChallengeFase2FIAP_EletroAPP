@@ -27,8 +27,8 @@ public class PessoaController {
             @RequestParam(value = "pagina", defaultValue = "0") Integer pagina,
             @RequestParam(value = "tamanho", defaultValue = "10") Integer tamanho
     ) {
+        filtro.setUsuario(usuarioId);
         PageRequest pageRequest = PageRequest.of(pagina, tamanho);
-
         var pessoas = pessoaService.buscarComFiltro(pageRequest, filtro);
         return ResponseEntity.ok(pessoas);
     }
@@ -47,6 +47,7 @@ public class PessoaController {
             @RequestHeader(requestReader) Long usuarioId,
             @RequestBody PessoaDTO pessoa
     ) {
+        pessoa.setUsuario(usuarioId);
         var pessoaCadastrada = pessoaService.cadastrarPessoa(pessoa);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand((pessoaCadastrada.getId())).toUri();
         return ResponseEntity.created(uri).body(pessoaCadastrada);

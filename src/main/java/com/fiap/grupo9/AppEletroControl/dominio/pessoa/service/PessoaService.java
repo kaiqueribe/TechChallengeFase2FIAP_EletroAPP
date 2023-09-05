@@ -32,7 +32,7 @@ public class PessoaService {
         }
         var pessoas = pessoaRepository.findByDTO(pagina, filtro.getId(), filtro.getNome(), filtro.getDataNascimento(),
                 filtro.getCpf(), sexo, filtro.getEmail(), filtro.getTelefone()
-                , filtro.getParentesco(), filtro.getEnderecoId());
+                , filtro.getParentesco(), filtro.getEnderecoId(), filtro.getUsuario());
         return pessoas.map(pessoaMapper::toDTO);
     }
 
