@@ -29,8 +29,8 @@ public class EnderecoController {
             @RequestParam(value = "pagina", defaultValue = "0") Integer pagina,
             @RequestParam(value = "tamanho", defaultValue = "10") Integer tamanho
     ) {
+        filtro.setUsuario(usuarioId);
         PageRequest pageRequest = PageRequest.of(pagina, tamanho);
-
         var enderecos = enderecoService.buscarComFiltro(pageRequest, filtro);
         return ResponseEntity.ok(enderecos);
     }
@@ -49,6 +49,7 @@ public class EnderecoController {
             @RequestHeader(requestReader) Long usuarioId,
             @RequestBody EnderecoDTO endereco
     ) {
+        endereco.setUsuario(usuarioId);
         var enderecoCadastrado = enderecoService.cadastrar(endereco);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand((enderecoCadastrado.getId())).toUri();
         return ResponseEntity.created(uri).body(enderecoCadastrado);

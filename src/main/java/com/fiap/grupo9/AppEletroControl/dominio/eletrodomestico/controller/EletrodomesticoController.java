@@ -31,6 +31,7 @@ public class EletrodomesticoController {
             @RequestParam(value = "pagina", defaultValue = "0") Integer pagina,
             @RequestParam(value = "tamanho", defaultValue = "10") Integer tamanho
     ) {
+        filtro.setUsuario(usuarioId);
         PageRequest pageRequest = PageRequest.of(pagina, tamanho);
         var eletrodomesticos = eletrodomesticoService.buscarComFiltro(pageRequest, filtro);
         return ResponseEntity.ok(eletrodomesticos);
@@ -50,6 +51,7 @@ public class EletrodomesticoController {
             @RequestHeader(requestReader) Long usuarioId,
             @RequestBody EletrodomesticoDTO eletrodomestico
     ) {
+        eletrodomestico.setUsuario(usuarioId);
         var eletrodomesticoCadastrado = eletrodomesticoService.cadastrar(eletrodomestico);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand((eletrodomesticoCadastrado.getId())).toUri();
         return ResponseEntity.created(uri).body(eletrodomesticoCadastrado);

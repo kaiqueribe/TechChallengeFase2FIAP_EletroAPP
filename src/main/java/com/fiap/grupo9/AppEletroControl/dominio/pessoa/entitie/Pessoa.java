@@ -1,5 +1,6 @@
 package com.fiap.grupo9.AppEletroControl.dominio.pessoa.entitie;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fiap.grupo9.AppEletroControl.dominio.endereco.entitie.Endereco;
 import com.fiap.grupo9.AppEletroControl.dominio.pessoa.enums.Sexo;
 import jakarta.persistence.*;
@@ -32,4 +33,5 @@ public class Pessoa {
     @OneToOne
     private Endereco endereco;
     private String parentesco;
-}
+    @JsonIgnore
+    private Long usuario;}

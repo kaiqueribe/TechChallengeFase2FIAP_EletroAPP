@@ -11,12 +11,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IEletrodomesticoRepository extends JpaRepository<Eletrodomestico, Long> {
-    @Query(value = "select e.id, e.nome, e.modelo, e.potencia, e.voltagem " +
+    @Query(value = "select e.id, e.nome, e.modelo, e.potencia, e.voltagem, e.usuario " +
                     "from tb_eletrodomestico e " +
                     "where (:nome is null or e.nome = :nome)" +
                     "and (:id is null or e.id = :id)" +
                     "and (:modelo is null or e.modelo = :modelo)" +
                     "and (:voltagem is null or e.voltagem = :voltagem)" +
+                    "and (:usuarioId is null or e.usuario = :usuarioId)" +
                     "and (:potencia is null or e.potencia = :potencia)"
     ,nativeQuery = true
     ,countQuery = "select count(1) " +
@@ -25,6 +26,7 @@ public interface IEletrodomesticoRepository extends JpaRepository<Eletrodomestic
                     "and (:id is null or e.id = :id)" +
                     "and (:modelo is null or e.modelo = :modelo)" +
                     "and (:voltagem is null or e.voltagem = :voltagem)" +
+                    "and (:usuarioId is null or e.usuario = :usuarioId)" +
                     "and (:potencia is null or e.potencia = :potencia)"
     )
     Page<Eletrodomestico> findByDTO(
@@ -33,6 +35,7 @@ public interface IEletrodomesticoRepository extends JpaRepository<Eletrodomestic
             @Param("id") Long id,
             @Param("modelo") String modelo,
             @Param("voltagem") Double voltagem,
-            @Param("potencia") Double potencia
+            @Param("potencia") Double potencia,
+            @Param("usuarioId") Long usuarioId
     );
 }

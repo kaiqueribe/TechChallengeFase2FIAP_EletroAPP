@@ -1,6 +1,8 @@
 package com.fiap.grupo9.AppEletroControl.dominio.eletrodomestico.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Getter
@@ -18,4 +20,6 @@ public class EletrodomesticoDTO {
     private String modelo;
     private Double potencia;
     private Double voltagem;
+    @JsonIgnore
+    private Long usuario;
 }

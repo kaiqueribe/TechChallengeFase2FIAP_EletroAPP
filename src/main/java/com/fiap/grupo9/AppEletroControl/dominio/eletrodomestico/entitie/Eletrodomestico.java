@@ -20,4 +20,5 @@ public class Eletrodomestico {
     private String modelo;
     private Double potencia;
     private Double voltagem;
+    private Long usuario;
 }

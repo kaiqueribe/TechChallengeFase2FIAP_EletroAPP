@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Repository
 public interface IPessoaRepository extends JpaRepository <Pessoa, Long> {
     @Query(value = "select e.id, e.nome, e.data_nascimento, e.cpf, e.sexo, " +
-                "e.email, e.telefone, e.parentesco, e.endereco_id " +
+                "e.email, e.telefone, e.parentesco, e.endereco_id, e.usuario " +
                 "from tb_pessoa e " +
                 "where (:id is null or e.id = :id)" +
                 "and (:nome is null or e.nome = :nome)" +
@@ -23,7 +23,8 @@ public interface IPessoaRepository extends JpaRepository <Pessoa, Long> {
                 "and (:email is null or e.email = :email)" +
                 "and (:telefone is null or e.telefone = :telefone)" +
                 "and (:parentesco is null or e.parentesco = :parentesco)" +
-                "and (:endereco_id is null or e.endereco_id = :endereco_id)"
+                "and (:endereco_id is null or e.endereco_id = :endereco_id)" +
+                "and (:usuarioId is null or e.usuario = :usuarioId)"
             ,nativeQuery = true
             ,countQuery = "select count(1) " +
                 "from tb_pessoa e " +
@@ -35,7 +36,9 @@ public interface IPessoaRepository extends JpaRepository <Pessoa, Long> {
                 "and (:email is null or e.email = :email)" +
                 "and (:telefone is null or e.telefone = :telefone)" +
                 "and (:parentesco is null or e.parentesco = :parentesco)" +
-                "and (:endereco_id is null or e.endereco_id = :endereco_id)"
+                "and (:endereco_id is null or e.endereco_id = :endereco_id)" +
+                "and (:usuarioId is null or e.usuario = :usuarioId)"
+
     )
     Page<Pessoa> findByDTO(
             Pageable pageable,
@@ -47,6 +50,7 @@ public interface IPessoaRepository extends JpaRepository <Pessoa, Long> {
             @Param("email") String email,
             @Param("telefone") String telefone,
             @Param("parentesco") String parentesco,
-            @Param("endereco_id") Long endereco_id
+            @Param("endereco_id") Long endereco_id,
+            @Param("usuarioId") Long usuarioId
     );
 }

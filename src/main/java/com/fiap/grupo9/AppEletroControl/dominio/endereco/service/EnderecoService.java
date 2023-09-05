@@ -23,7 +23,8 @@ public class EnderecoService {
     public Page<EnderecoDTO> buscarComFiltro(PageRequest pagina, EnderecoDTOFilter filtro) {
         log.info("Buscando endereços com filtros...");
         var enderecos = repository.findByDTO(pagina,filtro.getRua(), filtro.getId(), filtro.getCep(),
-                filtro.getNumero(), filtro.getCidade(),filtro.getBairro(), filtro.getUf(), filtro.getComplemento());
+                filtro.getNumero(), filtro.getCidade(),filtro.getBairro(), filtro.getUf(),
+                filtro.getComplemento(), filtro.getUsuario());
         return enderecos.map(enderecoMapper::toDTO);
     }
 

@@ -57,4 +57,6 @@ public class PessoaDTO {
         return id;
     }
 
+    @JsonIgnore
+    private Long usuario;
 }
