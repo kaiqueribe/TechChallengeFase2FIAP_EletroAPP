@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "088281c2-6299-43ee-a86b-3de5f3971b12",
+		"_postman_id": "835e144c-68d6-46fb-aa06-dc55f5d6b347",
 		"name": "FIAP - Challenge - Eletro",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "2416879"
+		"_exporter_id": "5320581"
 	},
 	"item": [
 		{
@@ -13,10 +13,16 @@
 					"name": "Cadastrar endereço",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "usuario-auth-key",
+								"value": "2",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"rua\": \"Rua Fidêncio Ramos\",\n    \"numero\": 308,\n    \"bairro\": \"Vila Olimpia\",\n    \"cidade\": \"São Paulo\",\n    \"uf\": \"SP\",\n    \"cep\": \"13043-189\",\n    \"complemento\": \"AP 67\"\n}",
+							"raw": "{\n    \"rua\": \"Rua Fidêncio Ramos\",\n    \"numero\": 308,\n    \"bairro\": \"Vila Olimpia\",\n    \"cidade\": \"São Paulo\",\n    \"estado\": \"SP\",\n    \"cep\": \"08675-240\",\n    \"uf\": \"SP\",\n    \"complemento\": \"n/a\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -39,40 +45,25 @@
 					"response": []
 				},
 				{
-					"name": "Buscar todos os endereços cadastrados",
+					"name": "Delete Endereço",
 					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/eletro/enderecos?pagina=0&tamanho=5",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"eletro",
-								"enderecos"
-							],
-							"query": [
-								{
-									"key": "pagina",
-									"value": "0"
-								},
-								{
-									"key": "tamanho",
-									"value": "5"
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "usuario-auth-key",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Buscar um endereço específico por ID",
-					"request": {
-						"method": "GET",
-						"header": [],
+							}
+						},
 						"url": {
 							"raw": "http://localhost:8080/eletro/enderecos/1",
 							"protocol": "http",
@@ -88,6 +79,65 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Buscar todos os endereços cadastrados",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "usuario-auth-key",
+								"value": "2",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/eletro/enderecos?uf=SP",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"eletro",
+								"enderecos"
+							],
+							"query": [
+								{
+									"key": "uf",
+									"value": "SP"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar um endereço específico por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "usuario-auth-key",
+								"value": "1",
+								"equals": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/eletro/enderecos/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"eletro",
+								"enderecos",
+								"2"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -98,10 +148,16 @@
 					"name": "Cadastrar pessoa",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "usuario-auth-key",
+								"value": "3",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\": \"Jack Sparrow\",\n    \"cpf\": \"443.324.324-84\",\n    \"dataNascimento\": \"1963-06-09\",\n    \"sexo\": \"MASCULINO\",\n    \"email\": \"jack.sparrow@gmail.com\",\n    \"telefone\": \"(11) 3385-8010\",\n    \"parentesco\": \"primo distante\",\n    \"enderecoId\": 1\n}",
+							"raw": "{\n    \"nome\": \"Jack Sparrow\",\n    \"dataNascimento\": \"1963-06-09\",\n    \"sexo\": \"FEMININO\",\n    \"email\": \"jack.sparrow@gmail.com\",\n    \"telefone\": \"(11) 1111-1111\",\n    \"parentesco\": \"primo distante\",\n    \"enderecoId\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -127,7 +183,13 @@
 					"name": "Buscar todas as pessoas cadastradas",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "usuario-auth-key",
+								"value": "3",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost:8080/eletro/pessoas",
 							"protocol": "http",
@@ -138,6 +200,13 @@
 							"path": [
 								"eletro",
 								"pessoas"
+							],
+							"query": [
+								{
+									"key": "usuario-auth-key",
+									"value": "123",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -147,7 +216,40 @@
 					"name": "Buscar uma pessoa específica por ID",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "usuario-auth-key",
+								"value": "3",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/eletro/pessoas/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"eletro",
+								"pessoas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Pessoa",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "usuario-auth-key",
+								"value": "3",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost:8080/eletro/pessoas/1",
 							"protocol": "http",
@@ -173,10 +275,16 @@
 					"name": "Cadastrar eletrodoméstico",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "usuario-auth-key",
+								"value": "2",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\": \"TV do quarto\",\n    \"modelo\": \"LG OLED C2 55 polegadas\",\n    \"potenciaEmWatts\": 40\n}",
+							"raw": "{\n    \"nome\": \"Nome do device\",\n    \"modelo\": \"LG OLED C2 55 polegadas\",\n    \"potencia\": 40,\n    \"voltagem\" : 4\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -202,7 +310,13 @@
 					"name": "Buscar todos os eletrodoméstico cadastrados",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "usuario-auth-key",
+								"value": "2",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost:8080/eletro/eletrodomesticos",
 							"protocol": "http",
@@ -213,6 +327,18 @@
 							"path": [
 								"eletro",
 								"eletrodomesticos"
+							],
+							"query": [
+								{
+									"key": "nome",
+									"value": "Nome",
+									"disabled": true
+								},
+								{
+									"key": "potencia",
+									"value": "1.0",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -223,6 +349,33 @@
 					"request": {
 						"method": "GET",
 						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/eletro/eletrodomesticos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"eletro",
+								"eletrodomesticos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete eletrodomestico",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "usuario-auth-key",
+								"value": "2",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost:8080/eletro/eletrodomesticos/1",
 							"protocol": "http",
